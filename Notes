@@ -33,6 +33,46 @@ mapped to some rows in the Theatre
 
 Auditorium has Shows -> 9-12,     12-3,       3-6,           6-9
                          S1        S2          S3             s4
-                       titanic   rockstar  TeesMaarKhan      DDLJ
+                       titanic   Pushpa 2   Khaadan         Baby John
 
 Show -> which movie, in which theatre, in which auditorium, with what features, which movie and what time
+
+
+Theatre -> adding this to BMS
+Theatre -> 4 auditorium -> 100 seats
+max capacity -> 400
+
+When we buy a ticket, we are not buying the seat but we are occupying the seat for a particular show
+Class -> ShowSeat : combination of particular show
+
+
+Theatre -> T1 -> A1
+Titanic
+
+9AM, 12noon, 4PM, 9PM
+1   2   3   4   5
+9AM,
+A   A   A   B   B
+
+12 noon
+B   B   B   B   B
+
+4PM
+A   A   A   A   A
+
+9PM
+B   B   B   B   A
+
+
+SEAT
+ID      STATUS
+1          9AM-A, 12NOON-B, 4PM-A, 9PM-B -> this doesn't makes sense
+
+
+SHOWSEAT
+ID[SEATID, SHOWID]
+1, 10                   A
+1, 11                   B
+1, 12                   A
+1, 13                   B
+
