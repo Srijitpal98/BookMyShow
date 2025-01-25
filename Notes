@@ -76,3 +76,8 @@ ID[SEATID, SHOWID]
 1, 12                   A
 1, 13                   B
 
+JPA -> Jakarta Persistence API [ abstraction ]
+|
+Hibernate -> generates SQL queries for Java applications
+|
+JDBC -> Java Database Connection -> connects our Java application to DB
