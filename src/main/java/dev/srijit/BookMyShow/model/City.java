@@ -14,4 +14,8 @@ public class City extends BaseModel{
     private String name;
     @OneToMany
     private List<Theatre> theatres;
+
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "seats")
+@Entity
 public class Seat extends BaseModel{
     @Column(name = "seatrow")
     private int row;
