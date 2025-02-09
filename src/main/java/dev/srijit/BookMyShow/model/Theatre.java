@@ -15,4 +15,6 @@ public class Theatre extends BaseModel{
     private String address;
     @OneToMany
     private List<Auditorium> auditoriums;
+
+
 }
