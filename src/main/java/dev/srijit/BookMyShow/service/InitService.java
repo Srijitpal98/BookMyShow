@@ -1,16 +1,15 @@
 package dev.srijit.BookMyShow.service;
 
-import dev.srijit.BookMyShow.model.Auditorium;
-import dev.srijit.BookMyShow.model.City;
-import dev.srijit.BookMyShow.model.Seat;
-import dev.srijit.BookMyShow.model.Theatre;
+import dev.srijit.BookMyShow.model.*;
 import dev.srijit.BookMyShow.model.constant.AuditoriumFeature;
 import dev.srijit.BookMyShow.model.constant.SeatStatus;
 import dev.srijit.BookMyShow.model.constant.SeatType;
+import dev.srijit.BookMyShow.model.constant.ShowSeatStatus;
 import dev.srijit.BookMyShow.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +29,8 @@ public class InitService {
     private MovieRepository movieRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ShowSeatRepository showSeatRepository;
 
     public boolean initialise(){
         City delhi = new City("Delhi");
@@ -70,8 +71,28 @@ public class InitService {
         auditorium.setSeats(savedSeats);
         auditoriumRepository.save(auditorium);
 
-        savedAshishTheatre.setAuditoriums(List.of(auditoriumRepository.findAuditoriumByName("Audi01")));
-        theatreRepository.save(savedAshishTheatre);
+        Auditorium savedAudi = auditoriumRepository.findAuditoriumByName("Audi01");
+        Theatre savedTheatre = theatreRepository.findTheatreByName("AshishMultiplex");
+        List<Auditorium> auditoriums = new ArrayList<>();
+        auditoriums.add(savedAudi);
+        savedTheatre.setAuditoriums(auditoriums);
+        theatreRepository.save(savedTheatre);
+
+        Movie movie = new Movie("Titanic", "best movie ever");
+        movieRepository.save(movie);
+
+        Show show = new Show();
+        show.setStartTime(LocalDateTime.now());
+        show.setEndTime(LocalDateTime.now().plusMinutes(180));
+        show.setMovie(movieRepository.findMovieByName("Titanic"));
+        show.setAuditorium(auditoriumRepository.findAuditoriumByName("Audi01"));
+
+        showRepository.save(show);
+
+        for(int i=1;i<=5;i++){
+            ShowSeat s = new ShowSeat(1200, showRepository.findById(1).get(), seatRepository.findSeatBySeatNumber(i+" "+i), ShowSeatStatus.AVAILABLE);
+            showSeatRepository.save(s);
+        }
 
         return true;
     }
