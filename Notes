@@ -100,3 +100,7 @@ TicketService -> UserService, ShowSeatService, MovieService
 TicketService -> TicketRepo
 
 TicketService -> UserRepo -> XXXX
+
+
+spring.jpa.hibernate.ddl-auto=update -> data definition language keep whatever is present and do the required update
+spring.jpa.hibernate.ddl-auto=create -> In data definition language, everytime if you restart the server, drops all the tables and create them from scratch
